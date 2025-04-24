@@ -50,6 +50,11 @@ function getRandomTileValue() {
 
 export function addRandomTile(board: Board) {
     const emptyTilesIndexes = getEmptyTilesIndexes(board);
+
+    if (emptyTilesIndexes.length === 0) {
+        return board;
+    }
+
     const [randomTileRow, randomTileCol] = emptyTilesIndexes[Math.floor(Math.random() * emptyTilesIndexes.length)];
     const newTileValue = getRandomTileValue();
 
