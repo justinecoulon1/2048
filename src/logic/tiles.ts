@@ -20,6 +20,17 @@ export function getTileColor(value: number): string {
     return COLOR_BY_NUMBER[value] ?? DEFAULT_COLOR;
 }
 
+const DEFAULT_SIZE = 70;
+const TILE_SIZE_BY_BOARD_SIZE: Record<number, number> = {
+    4: 70,
+    6: 40,
+    8: 35,
+}
+
+export function getTileSize(boardSize: number): number {
+    return TILE_SIZE_BY_BOARD_SIZE[boardSize] ?? DEFAULT_SIZE;
+}
+
 export function getEmptyTilesIndexes(board: Board) {
     const emptyTiles: [number, number][] = [];
     board.forEach((row, rowIndex) =>
@@ -31,6 +42,7 @@ export function getEmptyTilesIndexes(board: Board) {
     );
     return emptyTiles;
 }
+
 
 function getRandomTileValue() {
     return Math.random() < 0.5 ? 2 : 4;

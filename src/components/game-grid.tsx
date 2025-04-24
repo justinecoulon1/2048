@@ -1,16 +1,22 @@
 import {StyleSheet, Text, View} from "react-native";
 import {Board} from "../logic/types";
-import {getTileColor} from "../logic/tiles";
+import {getTileColor, getTileSize} from "../logic/tiles";
 
-export default function GameGrid({board}: { board: Board }) {
-    return (<View style={styles.grid}>
+export default function GameGrid({board, boardSize}: { board: Board; boardSize: number }) {
+    const tileSize = getTileSize(boardSize);
+
+    return (<View style={[styles.grid, {gap: tileSize / 7, padding: tileSize / 7}]}>
         {board.map((row, rowIndex) => (
-            <View style={styles.row} key={rowIndex}>
+            <View style={[styles.row, {gap: tileSize / 7}]} key={rowIndex}>
                 {row.map((cell, colIndex) => (
                     <View
-                        style={[styles.tile, {backgroundColor: getTileColor(cell)}]}
+                        style={[styles.tile, {
+                            backgroundColor: getTileColor(cell),
+                            width: tileSize,
+                            height: tileSize
+                        }]}
                         key={colIndex}>
-                        <Text style={styles.tileText}>{cell !== 0 ? cell : ''}</Text>
+                        <Text style={[styles.tileText, {fontSize: tileSize / 3}]}>{cell !== 0 ? cell : ''}</Text>
                     </View>
                 ))}
             </View>
@@ -21,17 +27,12 @@ export default function GameGrid({board}: { board: Board }) {
 const styles = StyleSheet.create({
     grid: {
         backgroundColor: '#e9d8b3',
-        padding: 8,
         borderRadius: 8,
-        gap: 8,
     },
     row: {
         flexDirection: 'row',
-        gap: 8,
     },
     tile: {
-        width: 70,
-        height: 70,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4,

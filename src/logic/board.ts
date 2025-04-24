@@ -2,12 +2,16 @@ import {Board, Direction} from "./types";
 import {addRandomTile} from "./tiles";
 
 export function initializeBoard(boardSize: number): Board {
-    return [
-        [0, 2, 4, 8],
-        [128, 64, 32, 16],
-        [256, 1024, 2048, 4096],
-        [0, 0, 0, 0],
-    ];
+    let board: number[][] = Array.from({length: boardSize}, () =>
+        Array(boardSize).fill(0)
+    );
+
+    for (let i = 0; i < boardSize / 2; i++) {
+
+        board = addRandomTile(board);
+    }
+    return board;
+
 }
 
 export function updateBoardHorizontally(board: Board, direction: Direction): Board {

@@ -44,7 +44,7 @@ export default function GameScreen({route}: { route: Route2048<'Game'> }) {
                         </Text>
                         <Button color="#b88f63" title={"reset"} onPress={resetBoard}></Button>
                     </View>
-                    <GameGrid board={board}/>
+                    <GameGrid board={board} boardSize={boardSize}/>
                 </View>
             </GestureDetector>
         </GestureHandlerRootView>

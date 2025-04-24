@@ -14,12 +14,12 @@ export const SizeOptions: Record<string, SizeOption> = {
         value: 4
     },
     EIGHT: {
-        label: "8x8",
-        value: 8
+        label: "6x6",
+        value: 6
     },
     SIXTEEN: {
-        label: "16x16",
-        value: 16
+        label: "8x8",
+        value: 8
     },
 }
 
