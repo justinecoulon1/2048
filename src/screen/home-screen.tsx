@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Route2048} from "./routes";
 import {use2048Navigation} from "../utils/navigation";
 
@@ -27,10 +27,7 @@ export const SizeOptions: Record<string, SizeOption> = {
 export default function HomeScreen({route}: { route: Route2048<'Home'> }) {
     return (
         <View style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>
-                    2048
-                </Text>
+            <View style={styles.gameStartContainer}>
                 {Object.values(SizeOptions).map(sizeOption =>
                     <StartGameButton key={sizeOption.label} sizeOption={sizeOption}/>
                 )}
@@ -42,15 +39,16 @@ export default function HomeScreen({route}: { route: Route2048<'Home'> }) {
 function StartGameButton({sizeOption}: { sizeOption: SizeOption }) {
     const navigation = use2048Navigation<'Game'>();
     return (
-        <Button color="#b88f63" title={sizeOption.label} onPress={() =>
-
+        <TouchableOpacity style={styles.gameStartButtons} onPress={() =>
             navigation.navigate({
                 name: 'Game',
                 params: {
                     size: sizeOption.value
                 }
             })
-        }></Button>
+        }>
+            <Text style={styles.gameStartButtonsText}>{sizeOption.label}</Text>
+        </TouchableOpacity>
     )
 }
 
@@ -58,20 +56,31 @@ function StartGameButton({sizeOption}: { sizeOption: SizeOption }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        display: "flex",
+        flexDirection: "column",
         alignItems: 'center',
+        justifyContent: "center",
         backgroundColor: '#f8f1e1',
         gap: 32,
     },
-    titleContainer: {
+    gameStartContainer: {
         display: "flex",
-        flexDirection: "row",
+        width: 200,
+        gap: 30,
+        flexDirection: "column",
+    },
+    gameStartButtons: {
+        display: "flex",
         alignItems: 'center',
-        padding: 32,
+        padding: 10,
+        backgroundColor: "#b88f63",
+        borderColor: "#f8f1e1",
+        borderRadius: 8,
+        borderWidth: 3,
     },
-    title: {
-        padding: 32,
-        fontSize: 38,
-        fontWeight: 'bold',
-        color: '#172036',
-    },
+    gameStartButtonsText: {
+        color: "#f8f1e1",
+        fontWeight: "bold",
+        fontSize: 28,
+    }
 });

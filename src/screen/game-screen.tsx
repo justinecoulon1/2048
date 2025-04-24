@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import {Gesture, GestureDetector, GestureHandlerRootView,} from 'react-native-gesture-handler';
 import GameGrid from "../components/game-grid";
 import {initializeBoard, updateBoardHorizontally, updateBoardVertically} from "../logic/board";
@@ -39,9 +39,6 @@ export default function GameScreen({route}: { route: Route2048<'Game'> }) {
             <GestureDetector gesture={pan}>
                 <View style={styles.container}>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>
-                            2048
-                        </Text>
                         <Button color="#b88f63" title={"reset"} onPress={resetBoard}></Button>
                     </View>
                     <GameGrid board={board} boardSize={boardSize}/>
