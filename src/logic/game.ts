@@ -2,7 +2,6 @@ import {Board} from "./types";
 import {getEmptyTilesIndexes} from "./tiles";
 
 export function isGameEnded(board: Board): Boolean {
-    console.log(board)
     if (getEmptyTilesIndexes(board).length !== 0) {
         return false;
     }

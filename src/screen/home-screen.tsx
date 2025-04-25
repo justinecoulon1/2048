@@ -23,7 +23,6 @@ export const SizeOptions: Record<string, SizeOption> = {
     },
 }
 
-
 export default function HomeScreen({route}: { route: Route2048<'Home'> }) {
     return (
         <View style={styles.container}>

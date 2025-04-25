@@ -14,7 +14,7 @@ export function initializeBoard(boardSize: number): Board {
 
 }
 
-export function updateBoardHorizontally(board: Board, direction: Direction): Board {
+export function updateBoardHorizontally(board: Board, direction: Direction, handleSetBiggestTile: (tile: number) => void, biggestTile: number | undefined): Board {
     let boardSize;
 
     const updatedBoard = board.map(row => {
@@ -26,6 +26,10 @@ export function updateBoardHorizontally(board: Board, direction: Direction): Boa
                 if (newRow[i] === newRow[i - 1]) {
                     newRow[i] *= 2;
                     newRow[i - 1] = 0;
+
+                    if (!biggestTile || newRow[i] > biggestTile) {
+                        handleSetBiggestTile(newRow[i])
+                    }
                 }
             }
 
@@ -40,6 +44,10 @@ export function updateBoardHorizontally(board: Board, direction: Direction): Boa
                 if (newRow[i] === newRow[i + 1]) {
                     newRow[i] *= 2;
                     newRow[i + 1] = 0;
+
+                    if (!biggestTile || newRow[i] > biggestTile) {
+                        handleSetBiggestTile(newRow[i])
+                    }
                 }
             }
 
@@ -55,7 +63,7 @@ export function updateBoardHorizontally(board: Board, direction: Direction): Boa
     return addRandomTile(updatedBoard);
 }
 
-export function updateBoardVertically(board: Board, direction: Direction): Board {
+export function updateBoardVertically(board: Board, direction: Direction, handleSetBiggestTile: (tile: number) => void, biggestTile: number | undefined): Board {
     const boardSize = board.length;
     const updatedBoard = Array.from({length: boardSize}, () => Array(boardSize).fill(0));
 
@@ -80,6 +88,10 @@ export function updateBoardVertically(board: Board, direction: Direction): Board
             if (column[i] === column[i + 1]) {
                 column[i] *= 2;
                 column[i + 1] = 0;
+
+                if (!biggestTile || column[i] > biggestTile) {
+                    handleSetBiggestTile(column[i])
+                }
             }
         }
 
